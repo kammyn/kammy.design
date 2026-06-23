@@ -1,0 +1,115 @@
+import Image from "next/image";
+import Link from "next/link";
+import { CaseStudyScrollColumn } from "@/components/CaseStudyScrollColumn";
+import type { CaseStudy } from "@/lib/caseStudies";
+import { cn } from "@/lib/cn";
+
+type CaseStudyTemplateProps = {
+  study: CaseStudy;
+};
+
+export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
+  return (
+    <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden">
+      <Link
+        href="/work"
+        className="group inline-flex w-fit shrink-0 items-center gap-2 font-editorial text-base italic text-accent"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden
+          className="transition-transform group-hover:-translate-x-0.5"
+        >
+          <path
+            d="M15 6L9 12L15 18"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        Back To Selected Work
+      </Link>
+
+      <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-hidden lg:grid lg:grid-cols-[minmax(0,394px)_1fr] lg:gap-10">
+        <CaseStudyScrollColumn className="pr-1">
+          <div className="flex flex-col gap-8 pb-2 lg:gap-10">
+            <header className="flex max-w-[335px] flex-col gap-8 text-accent">
+              <div className="flex flex-col gap-2">
+                <h1 className="font-editorial text-[clamp(1.75rem,2.5vw,2rem)] not-italic leading-tight">
+                  {study.title}
+                </h1>
+                <p className="font-editorial text-[clamp(1.125rem,1.8vw,1.5rem)] not-italic leading-snug">
+                  {study.subtitle}
+                </p>
+              </div>
+              <p className="font-editorial text-base not-italic">{study.category}</p>
+            </header>
+
+            <div className="flex max-w-[394px] flex-col gap-10">
+              {study.sections.map((section, index) => (
+                <div key={section.label}>
+                  {index > 0 && (
+                    <hr className="mb-10 border-0 border-t border-accent/30" />
+                  )}
+                  <section className="flex flex-col gap-2 text-accent">
+                    <h2 className="font-sans text-sm font-medium tracking-wide">
+                      {section.label}
+                    </h2>
+                    {section.bullets && section.bullets.length > 0 ? (
+                      <ul className="list-disc space-y-0 pl-6 font-sans text-base leading-6">
+                        {section.bullets.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : section.body ? (
+                      <p className="font-sans text-base leading-6">{section.body}</p>
+                    ) : (
+                      <p className="font-sans text-base leading-6 text-accent/40">
+                        Content coming soon.
+                      </p>
+                    )}
+                  </section>
+                </div>
+              ))}
+            </div>
+          </div>
+        </CaseStudyScrollColumn>
+
+        <CaseStudyScrollColumn className="flex flex-col gap-4 pb-2">
+          {study.images.map((image, index) => (
+            <CaseStudyImage key={`${study.slug}-image-${index}`} image={image} />
+          ))}
+        </CaseStudyScrollColumn>
+      </div>
+    </div>
+  );
+}
+
+function CaseStudyImage({
+  image,
+}: {
+  image: CaseStudy["images"][number];
+}) {
+  return (
+    <div
+      className={cn(
+        "relative aspect-[674/325] w-full shrink-0 overflow-hidden rounded-2xl",
+        !image.src && "bg-[#d9d9d9]",
+      )}
+    >
+      {image.src ? (
+        <Image
+          src={image.src}
+          alt={image.alt ?? ""}
+          fill
+          className="object-cover"
+          sizes="(max-width: 1024px) 100vw, 674px"
+        />
+      ) : null}
+    </div>
+  );
+}
