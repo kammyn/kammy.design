@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
 type CaseStudyScrollColumnProps = {
@@ -24,8 +24,12 @@ export function CaseStudyScrollColumn({
     const canScroll = scrollHeight > clientHeight + 1;
 
     setFadeTop(canScroll && scrollTop > 4);
-    setFadeBottom(canScroll && scrollTop + clientHeight < scrollHeight - 4);
+    setFadeBottom(canScroll && scrollTop + clientHeight < scrollHeight - 1);
   }, []);
+
+  useLayoutEffect(() => {
+    updateFades();
+  }, [updateFades]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -37,6 +41,9 @@ export function CaseStudyScrollColumn({
 
     const observer = new ResizeObserver(updateFades);
     observer.observe(el);
+    if (el.firstElementChild) {
+      observer.observe(el.firstElementChild);
+    }
 
     return () => {
       el.removeEventListener("scroll", updateFades);
@@ -49,27 +56,14 @@ export function CaseStudyScrollColumn({
       <div
         ref={scrollRef}
         className={cn(
-          "case-study-scroll h-full overflow-y-auto overscroll-contain",
+          "case-study-scroll h-full max-w-full overflow-x-hidden overflow-y-auto overscroll-contain",
+          fadeTop && "case-study-scroll--fade-top",
+          fadeBottom && "case-study-scroll--fade-bottom",
           className,
         )}
       >
         {children}
       </div>
-
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b from-cream to-transparent transition-opacity duration-200",
-          fadeTop ? "opacity-100" : "opacity-0",
-        )}
-      />
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-x-0 bottom-0 z-10 h-12 bg-gradient-to-t from-cream to-transparent transition-opacity duration-200",
-          fadeBottom ? "opacity-100" : "opacity-0",
-        )}
-      />
     </div>
   );
 }

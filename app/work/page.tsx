@@ -1,21 +1,28 @@
 import { PageShell } from "@/components/PageShell";
+import { CaseStudyScrollColumn } from "@/components/CaseStudyScrollColumn";
 import { ProjectCard } from "@/components/ProjectCard";
+import { getCaseStudyBySlug } from "@/lib/caseStudies";
 import { projects } from "@/lib/projects";
 
 export default function WorkPage() {
   return (
     <PageShell active="work">
-      <main className="mx-auto max-w-[1200px]">
-        <h1 className="font-editorial text-[clamp(1.75rem,3vw,2.25rem)] italic text-accent">
+      <CaseStudyScrollColumn className="flex min-h-0 min-w-0 flex-1 flex-col">
+        <h1 className="shrink-0 font-editorial text-2xl italic leading-none text-accent">
           Selected Works
         </h1>
 
-        <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-6">
+        <ul className="mt-4 grid min-w-0 grid-cols-1 gap-6 min-[744px]:grid-cols-2 lg:mt-4 lg:grid-cols-4">
           {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+            <li key={project.slug} className="min-w-0">
+              <ProjectCard
+                project={project}
+                category={getCaseStudyBySlug(project.slug)?.category}
+              />
+            </li>
           ))}
-        </div>
-      </main>
+        </ul>
+      </CaseStudyScrollColumn>
     </PageShell>
   );
 }

@@ -7,11 +7,10 @@ import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 import { ThemeToggle } from "./ThemeToggle";
 
-type NavItem = "work" | "services" | "about";
+type NavItem = "work" | "about";
 
 const navLinks: { label: string; href: string; key: NavItem }[] = [
   { label: "WORK", href: "/work", key: "work" },
-  { label: "SERVICES", href: "/services", key: "services" },
   { label: "ABOUT", href: "/about", key: "about" },
 ];
 
@@ -57,7 +56,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
                   active === key ? (
                     <span
                       key={key}
-                      className="py-3 font-sans text-lg font-medium text-accent"
+                      className="border-b-2 border-accent py-3 font-sans text-lg font-bold text-accent"
                     >
                       {label}
                     </span>
@@ -65,7 +64,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
                     <Link
                       key={key}
                       href={href}
-                      className="py-3 font-sans text-lg font-medium text-accent transition-opacity hover:opacity-70"
+                      className="py-3 font-sans text-lg font-medium text-accent-text transition-opacity hover:opacity-70"
                       onClick={closeMenu}
                     >
                       {label}
@@ -75,7 +74,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
               </div>
 
               <div className="mt-auto flex items-center gap-3 pt-8">
-                <span className="font-sans text-sm text-accent/60">Theme</span>
+                <span className="font-sans text-sm text-accent-text-muted">Theme</span>
                 <ThemeToggle />
               </div>
             </nav>
@@ -109,7 +108,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
               active === key ? (
                 <span
                   key={key}
-                  className="font-sans text-base font-medium text-accent"
+                  className="border-b-2 border-accent px-1 py-1 font-sans text-base font-bold text-accent"
                 >
                   {label}
                 </span>
@@ -117,7 +116,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
                 <Link
                   key={key}
                   href={href}
-                  className="font-sans text-base font-medium text-accent transition-opacity hover:opacity-70"
+                  className="px-1 py-1 font-sans text-base font-medium text-accent-text transition-opacity hover:opacity-70"
                 >
                   {label}
                 </Link>

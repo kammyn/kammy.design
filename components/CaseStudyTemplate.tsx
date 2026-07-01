@@ -8,12 +8,18 @@ type CaseStudyTemplateProps = {
   study: CaseStudy;
 };
 
+function toTitleCase(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden">
       <Link
         href="/work"
-        className="group inline-flex w-fit shrink-0 items-center gap-2 font-editorial text-base italic text-accent"
+        className="group inline-flex w-fit shrink-0 items-center gap-2 font-editorial text-base italic text-accent-text"
       >
         <svg
           width="24"
@@ -37,10 +43,10 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
       <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-hidden lg:grid lg:grid-cols-[minmax(0,394px)_1fr] lg:gap-10">
         <CaseStudyScrollColumn className="pr-1">
           <div className="flex flex-col gap-8 pb-2 lg:gap-10">
-            <header className="flex max-w-[335px] flex-col gap-8 text-accent">
-              <div className="flex flex-col gap-2">
+            <header className="flex max-w-[335px] flex-col gap-8 text-accent-text">
+              <div className="flex flex-col gap-2 text-accent">
                 <h1 className="font-editorial text-[clamp(1.75rem,2.5vw,2rem)] not-italic leading-tight">
-                  {study.title}
+                  {toTitleCase(study.title)}
                 </h1>
                 <p className="font-editorial text-[clamp(1.125rem,1.8vw,1.5rem)] not-italic leading-snug">
                   {study.subtitle}
@@ -53,10 +59,10 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
               {study.sections.map((section, index) => (
                 <div key={section.label}>
                   {index > 0 && (
-                    <hr className="mb-10 border-0 border-t border-accent/30" />
+                    <hr className="mb-10 border-0 border-t border-accent-text-muted/25" />
                   )}
-                  <section className="flex flex-col gap-2 text-accent">
-                    <h2 className="font-sans text-sm font-medium tracking-wide">
+                  <section className="flex flex-col gap-2 text-accent-text">
+                    <h2 className="font-sans text-sm font-medium tracking-wide text-accent-text">
                       {section.label}
                     </h2>
                     {section.bullets && section.bullets.length > 0 ? (
@@ -68,7 +74,7 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
                     ) : section.body ? (
                       <p className="font-sans text-base leading-6">{section.body}</p>
                     ) : (
-                      <p className="font-sans text-base leading-6 text-accent/40">
+                      <p className="font-sans text-base leading-6 text-accent-text-subtle">
                         Content coming soon.
                       </p>
                     )}

@@ -7,10 +7,10 @@ type ContentPanelProps = {
 };
 
 const panelVisibility: Record<(typeof starPanels)[number]["id"], string> = {
-  mobile: "md:hidden",
-  tablet: "hidden md:block lg:hidden",
-  "ipad-pro": "hidden lg:block xl:hidden",
-  "1280": "hidden xl:block 2xl:hidden",
+  mobile: "max-[743px]:block min-[744px]:hidden",
+  tablet: "hidden min-[744px]:block lg:hidden",
+  "ipad-pro": "hidden",
+  "1280": "hidden lg:block 2xl:hidden",
   desktop: "hidden 2xl:block",
 };
 

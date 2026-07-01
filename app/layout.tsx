@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { CursorSparkleTrail } from "@/components/CursorSparkleTrail";
 import "./globals.css";
 
 const panelSans = localFont({
@@ -19,10 +20,19 @@ const panelSans = localFont({
 });
 
 const editorial = localFont({
-  src: "../public/fonts/AstoriaEditorial-Italic.otf",
+  src: [
+    {
+      path: "../public/fonts/AstoriaEditorial-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/AstoriaEditorial-Italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
   variable: "--font-editorial",
-  weight: "400",
-  style: "italic",
 });
 
 export const metadata: Metadata = {
@@ -42,7 +52,10 @@ export default function RootLayout({
       className={`${panelSans.variable} ${editorial.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        {children}
+        <CursorSparkleTrail />
+      </body>
     </html>
   );
 }
