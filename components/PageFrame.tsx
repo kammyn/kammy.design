@@ -1,3 +1,4 @@
+import { BackgroundAura } from "@/components/BackgroundAura";
 import { ContentPanel } from "@/components/ContentPanel";
 import { SiteNav } from "@/components/SiteNav";
 import { cn } from "@/lib/cn";
@@ -15,19 +16,8 @@ export function PageFrame({
 }: PageFrameProps) {
   return (
     <div className="relative min-h-svh w-full overflow-hidden">
-      <div className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/home/bg-landscape.jpg"
-          alt=""
-          className="size-full object-cover object-center"
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/home/bg-overlay.png"
-          alt=""
-          className="absolute inset-0 size-full object-cover object-center opacity-90 mix-blend-multiply"
-        />
+      <div className="absolute inset-0 bg-cream">
+        <BackgroundAura />
       </div>
 
       <div

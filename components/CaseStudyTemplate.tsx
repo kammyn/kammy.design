@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CaseStudyScrollColumn } from "@/components/CaseStudyScrollColumn";
-import type { CaseStudy } from "@/lib/caseStudies";
+import type { CaseStudy, CaseStudyImage, CaseStudyMediaRow } from "@/lib/caseStudies";
 import { cn } from "@/lib/cn";
 
 type CaseStudyTemplateProps = {
@@ -86,35 +86,103 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
         </CaseStudyScrollColumn>
 
         <CaseStudyScrollColumn className="flex flex-col gap-4 pb-2">
-          {study.images.map((image, index) => (
-            <CaseStudyImage key={`${study.slug}-image-${index}`} image={image} />
-          ))}
+          {study.images.map((item, index) =>
+            isMediaRow(item) ? (
+              <div
+                key={`${study.slug}-media-row-${index}`}
+                className="grid grid-cols-2 gap-4"
+              >
+                {item.items.map((media, mediaIndex) => (
+                  <CaseStudyMedia
+                    key={`${study.slug}-media-${index}-${mediaIndex}`}
+                    media={media}
+                  />
+                ))}
+              </div>
+            ) : (
+              <CaseStudyMedia
+                key={`${study.slug}-media-${index}`}
+                media={item}
+              />
+            ),
+          )}
         </CaseStudyScrollColumn>
       </div>
     </div>
   );
 }
 
-function CaseStudyImage({
-  image,
-}: {
-  image: CaseStudy["images"][number];
-}) {
+function isMediaRow(item: CaseStudy["images"][number]): item is CaseStudyMediaRow {
+  return "layout" in item && item.layout === "row";
+}
+
+function isVideoMedia(media: CaseStudyImage): boolean {
+  if (media.type === "video") return true;
+  if (media.type === "image") return false;
+  return Boolean(media.src?.match(/\.(mp4|webm|mov)(\?|$)/i));
+}
+
+function isAnimatedMedia(src: string): boolean {
+  return /\.(gif|webp)(\?|$)/i.test(src);
+}
+
+function CaseStudyMedia({ media }: { media: CaseStudyImage }) {
+  const isVideo = isVideoMedia(media);
+  const isAnimated = Boolean(media.src && isAnimatedMedia(media.src));
+  const fit = media.fit ?? (isVideo || isAnimated ? "contain" : "cover");
+
   return (
     <div
       className={cn(
-        "relative aspect-[674/325] w-full shrink-0 overflow-hidden rounded-2xl",
-        !image.src && "bg-[#d9d9d9]",
+        "relative w-full shrink-0 overflow-hidden rounded-2xl",
+        !media.aspectRatio && "aspect-[674/325]",
+        !media.src && "bg-[#d9d9d9]",
+        !media.background &&
+          (isVideo || isAnimated) &&
+          fit === "contain" &&
+          "bg-white",
       )}
+      style={{
+        ...(media.background ? { backgroundColor: media.background } : {}),
+        ...(media.aspectRatio ? { aspectRatio: media.aspectRatio } : {}),
+      }}
     >
-      {image.src ? (
-        <Image
-          src={image.src}
-          alt={image.alt ?? ""}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 674px"
-        />
+      {media.src ? (
+        isVideo ? (
+          <video
+            src={media.src}
+            poster={media.poster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label={media.alt ?? "Product demo"}
+            className={cn(
+              "absolute inset-0 h-full w-full",
+              fit === "contain" ? "object-contain" : "object-cover",
+            )}
+          />
+        ) : isAnimated ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={media.src}
+            alt={media.alt ?? ""}
+            className={cn(
+              "absolute inset-0 h-full w-full",
+              fit === "contain" ? "object-contain" : "object-cover",
+            )}
+          />
+        ) : (
+          <Image
+            src={media.src}
+            alt={media.alt ?? ""}
+            fill
+            className={fit === "contain" ? "object-contain" : "object-cover"}
+            sizes="(max-width: 1024px) 100vw, 674px"
+            unoptimized={media.unoptimized}
+          />
+        )
       ) : null}
     </div>
   );

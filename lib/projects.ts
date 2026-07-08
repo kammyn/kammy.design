@@ -3,6 +3,7 @@ export type Project = {
   title: string;
   description: string;
   image?: string;
+  hoverImage?: string;
   color: string;
 };
 
@@ -12,6 +13,7 @@ export const projects: Project[] = [
     title: "GOBLINTOWN",
     description: "Interactive experiences for an evolving IP",
     image: "/images/work/goblintown.jpg",
+    hoverImage: "/images/work/goblintown-hover.jpg",
     color: "#3d5a3e",
   },
   {
@@ -19,6 +21,7 @@ export const projects: Project[] = [
     title: "MEME SHUFFLE",
     description: "Making memes playful and unpredictable",
     image: "/images/work/meme-shuffle.jpg",
+    hoverImage: "/images/work/meme-shuffle-hover.jpg",
     color: "#6b2a4a",
   },
   {

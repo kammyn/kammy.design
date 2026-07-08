@@ -7,7 +7,26 @@ export type CaseStudySection = {
 export type CaseStudyImage = {
   src?: string;
   alt?: string;
+  /** Defaults to image. Use video for mp4/webm UI demos. */
+  type?: "image" | "video";
+  /** Optional poster frame for video (path under /public). */
+  poster?: string;
+  /** object-fit for the media frame. Videos default to contain for UI clarity. */
+  fit?: "cover" | "contain";
+  /** Background color behind contained media (e.g. video letterboxing). */
+  background?: string;
+  /** Skip Next.js image optimization for crisp UI exports. */
+  unoptimized?: boolean;
+  /** Override default 674/325 frame ratio (e.g. "9/16" for mobile). */
+  aspectRatio?: string;
 };
+
+export type CaseStudyMediaRow = {
+  layout: "row";
+  items: CaseStudyImage[];
+};
+
+export type CaseStudyMediaItem = CaseStudyImage | CaseStudyMediaRow;
 
 export type CaseStudy = {
   slug: string;
@@ -15,7 +34,7 @@ export type CaseStudy = {
   subtitle: string;
   category: string;
   sections: CaseStudySection[];
-  images: CaseStudyImage[];
+  images: CaseStudyMediaItem[];
 };
 
 /** Figma template example — copy into a project entry when writing a case study. */
@@ -104,7 +123,26 @@ export const caseStudies: CaseStudy[] = [
         body: "The resulting experience made it easier for community members to navigate governance, understand proposals, and participate in decision-making, creating a stronger foundation for sustainable community engagement.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        type: "video",
+        src: "/videos/case-studies/Upstream-1.mp4",
+        alt: "Upstream governance dashboard demo",
+        background: "#9B8AFB",
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/Upstream2.mp4",
+        alt: "Upstream proposal workflow demo",
+        background: "#9B8AFB",
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/upstream-3.mp4",
+        alt: "Upstream voting and navigation demo",
+        background: "#9B8AFB",
+      },
+    ],
   },
   {
     slug: "goblintown",
@@ -162,7 +200,42 @@ export const caseStudies: CaseStudy[] = [
         body: "The platform gained traction among major web3 communities, including Goblintown and Pudgy Penguins, establishing itself as a centralized destination for meme discovery, collection, and cultural archiving.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        type: "video",
+        src: "/videos/case-studies/memedepot-1.mp4",
+        alt: "Meme Depot product demo",
+        background: "#1E003F",
+      },
+      {
+        src: "/images/work/meme-depot-posters.png",
+        alt: "Meme Depot exhibit posters — Pudgy Penguins, Angelical Goblins, and Shaturn Returns",
+        fit: "contain",
+        background: "#1E003F",
+        unoptimized: true,
+      },
+      {
+        layout: "row",
+        items: [
+          {
+            type: "video",
+            src: "/videos/case-studies/memedepot-mob1.mp4",
+            alt: "Meme Depot mobile experience",
+            background: "#1E003F",
+            fit: "cover",
+            aspectRatio: "9/16",
+          },
+          {
+            type: "video",
+            src: "/videos/case-studies/memedepot-mobilemenu.mp4",
+            alt: "Meme Depot mobile menu",
+            background: "#1E003F",
+            fit: "cover",
+            aspectRatio: "9/16",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "zeropoint",
@@ -220,7 +293,26 @@ export const caseStudies: CaseStudy[] = [
         body: "The resulting product transformed meme creation into a low-friction creative activity, demonstrating how internet culture could be packaged into a simple and engaging consumer experience.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        type: "video",
+        src: "/videos/case-studies/updated-meme-shuffle-video.mp4",
+        alt: "Meme Shuffle product demo",
+        background: "#0018FF",
+      },
+      {
+        src: "/images/work/meme-shuffle-logo.webp",
+        alt: "Meme Shuffle logo with animated rainbow paint stroke",
+        fit: "contain",
+      },
+      {
+        src: "/images/work/meme-shuffle-screens.png",
+        alt: "Meme Shuffle mobile screens — splash, onboarding, and meme generation flow",
+        fit: "contain",
+        background: "#0018FF",
+        unoptimized: true,
+      },
+    ],
   },
   {
     slug: "crofusion",
