@@ -31,6 +31,7 @@ export function ProjectCardMedia({
         src={image}
         alt=""
         fill
+        unoptimized
         className={cn(
           "object-cover transition-opacity duration-300",
           hovered && hoverImage ? "opacity-0" : "opacity-100",

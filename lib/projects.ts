@@ -13,7 +13,6 @@ export const projects: Project[] = [
     title: "GOBLINTOWN",
     description: "Interactive experiences for an evolving IP",
     image: "/images/work/goblintown.jpg",
-    hoverImage: "/images/work/goblintown-hover.jpg",
     color: "#3d5a3e",
   },
   {
@@ -21,7 +20,6 @@ export const projects: Project[] = [
     title: "MEME SHUFFLE",
     description: "Making memes playful and unpredictable",
     image: "/images/work/meme-shuffle.jpg",
-    hoverImage: "/images/work/meme-shuffle-hover.jpg",
     color: "#6b2a4a",
   },
   {
@@ -40,17 +38,17 @@ export const projects: Project[] = [
     color: "#6b4a2a",
   },
   {
-    slug: "zeropoint",
-    title: "ZEROPOINT",
-    description: "Making esoteric systems accessible and practical",
-    image: "/images/work/zeropoint.jpg",
+    slug: "przmatic",
+    title: "PRZMATIC",
+    description: "Mapping thoughts into insights",
+    image: "/images/work/przmatic.jpg",
     color: "#4a3d6b",
   },
   {
     slug: "crofusion",
     title: "CROFUSION",
     description: "AI generated landing pages for marketing optimization",
-    image: "/images/work/crofusion.jpg",
+    image: "/images/work/crofusion.png",
     color: "#4a6b3d",
   },
   {
@@ -64,7 +62,13 @@ export const projects: Project[] = [
     slug: "torii",
     title: "TORII",
     description: "Bringing clarity to the home buying process",
-    image: "/images/work/torii.jpg",
+    image: "/images/work/torii.png",
     color: "#3d4a6b",
   },
 ];
+
+export function getNextProject(currentSlug: string): Project {
+  const index = projects.findIndex((project) => project.slug === currentSlug);
+  if (index === -1) return projects[0];
+  return projects[(index + 1) % projects.length];
+}

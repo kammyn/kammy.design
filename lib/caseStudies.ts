@@ -19,10 +19,15 @@ export type CaseStudyImage = {
   unoptimized?: boolean;
   /** Override default 674/325 frame ratio (e.g. "9/16" for mobile). */
   aspectRatio?: string;
+  /** Animate a split background/foreground image pair. */
+  animation?: "grain-drift";
+  /** Foreground layer for grain-drift (logo on transparent). */
+  foregroundSrc?: string;
 };
 
 export type CaseStudyMediaRow = {
   layout: "row";
+  columns?: 2 | 3;
   items: CaseStudyImage[];
 };
 
@@ -152,7 +157,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         label: "OVERVIEW",
-        body: "Goblintown is an entertainment IP developed by Truth Arts, spanning storytelling, games, digital experiences, and community-driven worldbuilding. I contributed to the development of a roguelike game, designing gameplay systems and interactive experiences that expanded the Goblintown universe.",
+        body: "Goblintown is an entertainment IP developed by Truth Arts, spanning storytelling, games, digital experiences, and community-driven worldbuilding. I contributed to the development of a 100% hand-drawn roguelike game, designing gameplay systems and interactive experiences that expanded the Goblintown universe.",
       },
       {
         label: "INSIGHT",
@@ -171,7 +176,59 @@ export const caseStudies: CaseStudy[] = [
         body: "The project expanded Goblintown beyond traditional digital experiences, demonstrating how interactive gameplay could strengthen community engagement and deepen the identity of the broader entertainment IP.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        type: "video",
+        src: "/videos/case-studies/goblintown1.mov",
+        alt: "Goblintown gameplay demo",
+        background: "#286C7F",
+      },
+      {
+        src: "/images/work/goblintown-swamp.png",
+        alt: "Goblintown swamp gameplay with gobphone minimap",
+        fit: "contain",
+        unoptimized: true,
+      },
+      {
+        src: "/images/work/goblintown-stats.png",
+        alt: "Goblintown upgrade selection with gob stats panel",
+        fit: "contain",
+        unoptimized: true,
+      },
+      {
+        layout: "row",
+        columns: 2,
+        items: [
+          {
+            src: "/images/work/goblintown-gobphone-1.png",
+            alt: "Gobphone home screen with objectives and apps",
+            fit: "contain",
+            aspectRatio: "9/16",
+            unoptimized: true,
+          },
+          {
+            src: "/images/work/goblintown-gobphone-2.png",
+            alt: "Gobphone BiGiNC shop screen",
+            fit: "contain",
+            aspectRatio: "9/16",
+            unoptimized: true,
+          },
+        ],
+      },
+      {
+        src: "/images/work/goblintown-posters.png",
+        alt: "Goblintown exhibit posters — Shaturn Returns and Angelical Goblins",
+        fit: "contain",
+        unoptimized: true,
+      },
+      {
+        src: "/images/work/goblintown-sketches.png",
+        alt: "Goblintown inventory and UI concept sketches",
+        fit: "cover",
+        aspectRatio: "830/1024",
+        unoptimized: true,
+      },
+    ],
   },
   {
     slug: "meme-depot",
@@ -238,33 +295,90 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "zeropoint",
-    title: "ZEROPOINT",
-    subtitle: "Making esoteric systems accessible and practical",
-    category: "Wellness Tool / Self-Discovery / Personal Systems",
+    slug: "przmatic",
+    title: "PRZMATIC",
+    subtitle: "Mapping thoughts into insights",
+    category: "Productivity / Mind Mapping / Creativity",
     sections: [
       {
         label: "OVERVIEW",
-        body: "Zeropoint is an AI-driven app designed to curate personalized biohacking tools based on systems like astrology and human design. The platform explores how alternative self-discovery frameworks can be translated into structured, actionable insights through digital products.",
+        body: "Przmatic is a conceptual mind-mapping platform designed to help people explore ideas through connected thoughts rather than linear notes. The product combines guided prompts, visual mapping, and reflection into a creative thinking tool.",
       },
       {
         label: "INSIGHT",
-        body: "Frameworks like astrology, human design, and biohacking offer many insights about personal patterns and optimization, but the information is often fragmented and difficult to translate into daily practices. Users interested in these systems frequently struggle to turn abstract interpretations into actionable tools.",
+        body: "Creative ideas rarely emerge in a straight line. Most note-taking tools prioritize organization after an idea exists, but offer little support for discovering connections during the thinking process.",
       },
       {
         label: "STRATEGY",
-        body: "The product focused on simplifying complex self-discovery systems into practical recommendations. Astrology and human design data were used to generate personalized insights, which the platform translated into curated habits, tools, and biohacking practices that users could apply in everyday life.",
+        body: "The concept explored how visual mapping and guided prompts could help users externalize their thinking, identify patterns, and develop ideas through exploration rather than documentation.",
       },
       {
         label: "EXECUTION",
-        body: "I designed the product end-to-end, including the core product concept, onboarding flow, and the interface for generating and presenting personalized recommendations. The experience focused on making complex systems feel approachable and actionable for users.",
+        body: "I designed the product experience from concept to prototype, including the visual identity, interaction model, landing page, and core mind-mapping interface. The system explored branching thought structures, contextual prompts, and a calmer visual language that encouraged curiosity over productivity.",
       },
       {
         label: "OUTCOME",
-        body: "Zeropoint explored how alternative frameworks for self-discovery could be translated into structured digital products, combining AI-generated insights with curated tools to help users apply those systems in practical ways.",
+        body: "Przmatic is currently in beta, exploring how visual mapping, guided prompts, and nonlinear thinking can support creativity and self-discovery through a more intuitive product experience.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        layout: "row",
+        columns: 3,
+        items: [
+          {
+            type: "video",
+            src: "/videos/case-studies/przmatic1.mp4",
+            alt: "Przmatic product demo",
+            background: "#0B4444",
+            fit: "cover",
+            aspectRatio: "9/16",
+          },
+          {
+            type: "video",
+            src: "/videos/case-studies/przmatic2.mp4",
+            alt: "Przmatic guided prompts flow",
+            background: "#0B4444",
+            fit: "cover",
+            aspectRatio: "9/16",
+          },
+          {
+            type: "video",
+            src: "/videos/case-studies/przmatic3.mp4",
+            alt: "Przmatic mind map interaction",
+            background: "#0B4444",
+            fit: "cover",
+            aspectRatio: "9/16",
+          },
+        ],
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/przmatic-desktop.mp4",
+        alt: "Przmatic desktop mind-mapping experience",
+        background: "#0B4444",
+      },
+      {
+        layout: "row",
+        columns: 2,
+        items: [
+          {
+            src: "/images/work/przmatic-logos.png",
+            alt: "Przmatic logo mark on green and black",
+            fit: "contain",
+            aspectRatio: "1/1",
+            unoptimized: true,
+          },
+          {
+            src: "/images/work/przmatic-wordmark.png",
+            alt: "Przmatic wordmark on textured green background",
+            fit: "cover",
+            aspectRatio: "1/1",
+            unoptimized: true,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "meme-shuffle",
@@ -341,7 +455,26 @@ export const caseStudies: CaseStudy[] = [
         body: "The resulting MVP streamlined the process of creating and testing landing pages, giving businesses a faster path from marketing idea to live experiment.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        type: "video",
+        src: "/videos/case-studies/crofusion1.mp4",
+        alt: "CroFusion product demo",
+        background: "#4376E0",
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/crofusion2.mp4",
+        alt: "CroFusion AI landing page generation",
+        background: "#4376E0",
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/crofusion3.mp4",
+        alt: "CroFusion campaign management workflow",
+        background: "#4376E0",
+      },
+    ],
   },
   {
     slug: "torii",
@@ -370,7 +503,34 @@ export const caseStudies: CaseStudy[] = [
         body: "The resulting experience gave buyers greater clarity and confidence throughout the homebuying journey while helping agents collect better information and support clients more effectively. More broadly, the platform established a foundation for a more transparent and product-led approach to the customer experience.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        type: "video",
+        src: "/videos/case-studies/torii2.mp4",
+        alt: "Torii buyer journey workflow",
+        background: "#FFD750",
+      },
+      {
+        src: "/images/work/torii-search.png",
+        alt: "Torii property search with map and listings",
+        fit: "contain",
+        background: "#FFD750",
+        unoptimized: true,
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/torii1.mp4",
+        alt: "Torii homebuying platform demo",
+        background: "#FFD750",
+      },
+      {
+        src: "/images/work/torii-listing.png",
+        alt: "Torii property listing detail view",
+        fit: "contain",
+        background: "#FFD750",
+        unoptimized: true,
+      },
+    ],
   },
   {
     slug: "realreports",
@@ -399,7 +559,32 @@ export const caseStudies: CaseStudy[] = [
         body: "The resulting platform made real estate data easier to access, understand, and explore, transforming fragmented information into a cohesive product experience.",
       },
     ],
-    images: [{}, {}, {}],
+    images: [
+      {
+        type: "video",
+        src: "/videos/case-studies/bhr1.mp4",
+        alt: "RealReports property data platform demo",
+        background: "#E5A4E6",
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/bhr2.mp4",
+        alt: "RealReports property intelligence workflow",
+        background: "#E5A4E6",
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/bhr3.mp4",
+        alt: "RealReports property report experience",
+        background: "#E5A4E6",
+      },
+      {
+        type: "video",
+        src: "/videos/case-studies/bhr4.mp4",
+        alt: "RealReports data exploration experience",
+        background: "#E5A4E6",
+      },
+    ],
   },
 ];
 

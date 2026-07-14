@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CaseStudyGrainDrift } from "@/components/CaseStudyGrainDrift";
 import { CaseStudyScrollColumn } from "@/components/CaseStudyScrollColumn";
 import type { CaseStudy, CaseStudyImage, CaseStudyMediaRow } from "@/lib/caseStudies";
+import { getNextProject } from "@/lib/projects";
 import { cn } from "@/lib/cn";
 
 type CaseStudyTemplateProps = {
@@ -15,6 +17,8 @@ function toTitleCase(str: string): string {
 }
 
 export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
+  const nextProject = getNextProject(study.slug);
+
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden">
       <Link
@@ -82,6 +86,40 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
                 </div>
               ))}
             </div>
+
+            <Link
+              href={`/work/${nextProject.slug}`}
+              className="group mt-10 flex max-w-[394px] flex-col gap-2 border-t border-accent-text-muted/25 pt-10"
+            >
+              <span className="font-sans text-xs font-medium uppercase tracking-wide text-accent-text-muted">
+                Next Case Study
+              </span>
+              <span className="font-editorial text-[clamp(1.25rem,2vw,1.5rem)] leading-snug text-accent">
+                {toTitleCase(nextProject.title)}
+              </span>
+              <span className="font-editorial text-base not-italic leading-snug text-accent-text">
+                {nextProject.description}
+              </span>
+              <span className="mt-1 inline-flex items-center gap-2 font-editorial text-base italic text-accent-text transition-colors group-hover:text-accent">
+                View Project
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden
+                  className="transition-transform group-hover:translate-x-0.5"
+                >
+                  <path
+                    d="M9 6L15 12L9 18"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </Link>
           </div>
         </CaseStudyScrollColumn>
 
@@ -90,7 +128,10 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
             isMediaRow(item) ? (
               <div
                 key={`${study.slug}-media-row-${index}`}
-                className="grid grid-cols-2 gap-4"
+                className={cn(
+                  "grid gap-4",
+                  item.columns === 3 ? "grid-cols-3" : "grid-cols-2",
+                )}
               >
                 {item.items.map((media, mediaIndex) => (
                   <CaseStudyMedia
@@ -127,6 +168,17 @@ function isAnimatedMedia(src: string): boolean {
 }
 
 function CaseStudyMedia({ media }: { media: CaseStudyImage }) {
+  if (media.animation === "grain-drift" && media.src) {
+    return (
+      <CaseStudyGrainDrift
+        backgroundSrc={media.src}
+        foregroundSrc={media.foregroundSrc}
+        alt={media.alt ?? ""}
+        backgroundColor={media.background}
+      />
+    );
+  }
+
   const isVideo = isVideoMedia(media);
   const isAnimated = Boolean(media.src && isAnimatedMedia(media.src));
   const fit = media.fit ?? (isVideo || isAnimated ? "contain" : "cover");
