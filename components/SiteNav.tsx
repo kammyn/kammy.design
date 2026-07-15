@@ -148,7 +148,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="text-heading transition-colors hover:text-accent"
+              className="text-accent transition-colors hover:text-heading"
             >
               <LinkedinLogo weight="fill" size={22} />
             </a>
@@ -157,7 +157,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
 
           <button
             type="button"
-            className="relative z-[60] flex flex-col justify-center gap-1.5 p-2 lg:hidden"
+            className="relative z-[60] -mr-2 flex flex-col justify-center gap-1.5 p-2 lg:hidden"
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             onClick={() => setMenuOpen((open) => !open)}

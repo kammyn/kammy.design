@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { CursorSparkleTrail } from "@/components/CursorSparkleTrail";
 import "./globals.css";
 
@@ -36,10 +37,13 @@ const editorial = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Kammy Nguyen",
+  title: "Kammy Nguyen — Lead Product Designer",
   description:
     "I design products and interactive experiences shaped by systems, storytelling, and culture.",
 };
+
+/* Light by default; only an explicit saved "dark" preference enables dark mode. */
+const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark");else document.documentElement.classList.remove("dark")}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -53,6 +57,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
         {children}
         <CursorSparkleTrail />
       </body>

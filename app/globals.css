@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  color-scheme: light;
   --background: #f7f3e7;
   --foreground: #35322d;
   --heading: #2b3fa8;
@@ -13,7 +14,17 @@
   --cream: #f7f3e7;
   --panel-surface: #f7f3e7;
   --site-footer-h: 1.25rem;
-  --site-footer-gap: 16px;
+  /* Space between panel bottom and copyright row */
+  --site-footer-gap: 8px;
+  /* Mobile viewport gutters — balanced landscape frame around the panel */
+  --page-gutter-x: 20px;
+  --page-gutter-top: 28px;
+  --page-gutter-bottom: calc(
+    8px + var(--site-footer-h) + var(--site-footer-gap)
+  );
+  --panel-pad-x: 24px;
+  --panel-pad-top: 28px;
+  --panel-pad-bottom: 28px;
 }
 
 @theme inline {
@@ -30,6 +41,7 @@
 }
 
 html.dark {
+  color-scheme: dark;
   --background: #0d203c;
   --foreground: #ffffff;
   --heading: #ffffff;
@@ -39,6 +51,13 @@ html.dark {
   --accent-text-subtle: rgb(255 255 255 / 0.55);
   --cream: #0d203c;
   --panel-surface: #0d203c;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Keep light tokens unless the user opted into .dark via toggle */
+  :root:not(.dark) {
+    color-scheme: light;
+  }
 }
 
 body {
@@ -282,7 +301,7 @@ html.dark .site-background__image--night {
   );
 }
 
-/* Figma panel shell: 24px side inset below 744px, 80px from 744px up */
+/* Panel shell: framed gutters on mobile, 80px sides from 744px up */
 .page-panel {
   position: absolute;
   z-index: 10;
@@ -295,20 +314,26 @@ html.dark .site-background__image--night {
   container-name: panel;
   max-width: 100%;
 
-  top: 24px;
-  width: calc(100% - 48px);
-  max-height: calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h));
+  top: var(--page-gutter-top);
+  width: calc(100% - (var(--page-gutter-x) * 2));
+  max-height: calc(100svh - var(--page-gutter-top) - var(--page-gutter-bottom));
 }
 
 .page-panel--star {
-  bottom: calc(var(--site-footer-gap) + var(--site-footer-h));
+  /* Keep Figma 345/764 ratio — pinning top+bottom stretches awkwardly on tall phones */
+  bottom: auto;
   aspect-ratio: 345 / 764;
-  width: min(calc(100% - 48px), calc((100svh - 48px - var(--site-footer-gap) - var(--site-footer-h)) * 345 / 764));
-  max-height: calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h));
+  width: min(
+    calc(100% - (var(--page-gutter-x) * 2)),
+    calc(
+      (100svh - var(--page-gutter-top) - var(--page-gutter-bottom)) * 345 / 764
+    )
+  );
+  max-height: calc(100svh - var(--page-gutter-top) - var(--page-gutter-bottom));
 }
 
 .page-panel--solid {
-  bottom: calc(var(--site-footer-gap) + var(--site-footer-h));
+  bottom: var(--page-gutter-bottom);
   border-radius: 16px;
 }
 
@@ -316,7 +341,7 @@ html.dark .site-background__image--night {
   position: relative;
   z-index: 10;
   flex-shrink: 0;
-  padding: 24px 24px 0;
+  padding: var(--panel-pad-top) var(--panel-pad-x) 0;
 }
 
 .page-panel__content {
@@ -327,36 +352,47 @@ html.dark .site-background__image--night {
   min-width: 0;
   flex: 1;
   flex-direction: column;
-  padding: 0 24px 32px;
+  padding: 0 var(--panel-pad-x) var(--panel-pad-bottom);
 }
 
 @media (min-width: 744px) {
+  :root {
+    --site-footer-gap: 16px;
+    --page-gutter-x: 80px;
+    --page-gutter-top: auto;
+    --page-gutter-bottom: calc(var(--site-footer-gap) + var(--site-footer-h));
+    --panel-pad-x: 40px;
+    --panel-pad-top: 24px;
+    --panel-pad-bottom: 40px;
+  }
+
   .page-panel {
     top: auto;
-    bottom: calc(var(--site-footer-gap) + var(--site-footer-h));
-    max-height: min(836px, calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h)));
+    bottom: var(--page-gutter-bottom);
+    max-height: min(
+      836px,
+      calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h))
+    );
   }
 
   .page-panel--star {
-    bottom: calc(var(--site-footer-gap) + var(--site-footer-h));
+    bottom: var(--page-gutter-bottom);
     width: min(1280px, calc(100% - 160px));
     aspect-ratio: 1280 / 836;
-    max-height: min(836px, calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h)));
+    max-height: min(
+      836px,
+      calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h))
+    );
   }
 
   .page-panel--solid {
-    bottom: calc(var(--site-footer-gap) + var(--site-footer-h));
+    bottom: var(--page-gutter-bottom);
     width: min(1280px, calc(100% - 160px));
     aspect-ratio: 1280 / 836;
-    max-height: min(836px, calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h)));
-  }
-
-  .page-panel__nav {
-    padding: 24px 40px 0;
-  }
-
-  .page-panel__content {
-    padding: 0 40px 40px;
+    max-height: min(
+      836px,
+      calc(100svh - 48px - var(--site-footer-gap) - var(--site-footer-h))
+    );
   }
 }
 
@@ -366,7 +402,7 @@ html.dark .site-background__image--night {
   left: 50%;
   bottom: 8px;
   display: flex;
-  width: calc(100% - 48px);
+  width: calc(100% - (var(--page-gutter-x) * 2));
   height: var(--site-footer-h);
   align-items: center;
   justify-content: flex-end;
@@ -377,7 +413,6 @@ html.dark .site-background__image--night {
   font-size: 0.75rem;
   line-height: 1;
   letter-spacing: 0.01em;
-  text-transform: lowercase;
 }
 
 @media (min-width: 744px) {
@@ -422,17 +457,17 @@ html.dark .site-background__image--night {
 .hero-headline {
   width: 100%;
   min-width: 0;
-  max-width: min(36rem, 95%);
-  padding-bottom: 0.25rem;
-  font-size: clamp(0.95rem, 4.4cqi, 1.375rem);
-  line-height: 1.2;
+  max-width: min(36rem, 100%);
+  padding-bottom: 0.5rem;
+  font-size: clamp(1.25rem, 5.6cqi, 1.625rem);
+  line-height: 1.22;
   overflow-wrap: break-word;
 }
 
 @container panel (min-width: 22rem) {
   .hero-headline {
-    max-width: min(42rem, 92%);
-    font-size: clamp(1.05rem, 3.8cqi, 1.5rem);
+    max-width: min(42rem, 96%);
+    font-size: clamp(1.35rem, 5cqi, 1.75rem);
   }
 }
 

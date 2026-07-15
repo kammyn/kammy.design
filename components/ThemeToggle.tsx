@@ -7,9 +7,9 @@ export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const dark = stored === "dark" || (!stored && prefersDark);
+    // Light is the default; only an explicit "dark" choice enables dark mode.
+    // System prefers-color-scheme is intentionally ignored.
+    const dark = localStorage.getItem("theme") === "dark";
     setIsDark(dark);
     document.documentElement.classList.toggle("dark", dark);
   }, []);
