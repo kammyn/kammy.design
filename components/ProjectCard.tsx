@@ -33,7 +33,7 @@ export function ProjectCard({ project, category }: ProjectCardProps) {
       )}
 
       <div className="flex min-w-0 flex-col gap-2 break-words">
-        <h2 className="font-sans text-lg font-bold leading-normal text-accent">
+        <h2 className="font-sans text-lg font-bold leading-normal text-heading transition-colors duration-300 group-hover:text-accent">
           {project.title}
         </h2>
         {tags.length > 0 ? (

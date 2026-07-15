@@ -33,7 +33,7 @@ export function ContentPanel({
           >
             <path
               d={path}
-              fill="#F7F3E7"
+              className="fill-cream"
               fillRule="evenodd"
               clipRule="evenodd"
             />
@@ -45,7 +45,7 @@ export function ContentPanel({
 
   return (
     <div className={cn("pointer-events-none absolute inset-0", className)} aria-hidden>
-      <div className="size-full rounded-[20px] bg-cream/95 sm:rounded-[24px] lg:rounded-3xl" />
+      <div className="size-full rounded-2xl bg-cream" />
     </div>
   );
 }

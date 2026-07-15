@@ -1,12 +1,18 @@
 export function BackgroundAura() {
   return (
-    <div aria-hidden className="background-aura">
-      <div className="aura-blob aura-blob--one" />
-      <div className="aura-blob aura-blob--two" />
-      <div className="aura-blob aura-blob--three" />
-      <div className="aura-blob aura-blob--four" />
-      <div className="background-grain background-grain--one" />
-      <div className="background-grain background-grain--two" />
+    <div aria-hidden className="site-background">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/daybg.png"
+        alt=""
+        className="site-background__image site-background__image--day"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/nightbg.png"
+        alt=""
+        className="site-background__image site-background__image--night"
+      />
     </div>
   );
 }

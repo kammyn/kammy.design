@@ -11,9 +11,17 @@ export const resumeExperience: ResumeExperience[] = [
     id: "truth-arts",
     title: "Lead Designer & Game Developer",
     company: "Truth Arts",
-    dates: "Jun 2023 – Feb 2026",
+    dates: "Feb 2024 – Feb 2026",
     description:
       "Designed and developed interactive products, games, and digital experiences that expanded the Goblintown IP and broader Truth Arts products.",
+  },
+  {
+    id: "upstream",
+    title: "Lead Product Designer",
+    company: "Upstream",
+    dates: "Feb 2023 – Jan 2024",
+    description:
+      "Led product design across a suite of governance and community products, creating scalable systems that made decentralized participation easier to understand and navigate.",
   },
   {
     id: "realreports",
@@ -37,6 +45,6 @@ export const resumeExperience: ResumeExperience[] = [
     company: "Freelance",
     dates: "Oct 2019 – Mar 2021",
     description:
-      "Designed end-to-end digital products for startups across AI, insurtech, SaaS, consumer technology, and web3—from product strategy and UX to visual design, design systems, and developer handoff.",
+      "Designed end-to-end digital products for early-stage startups across AI, B2B SaaS, consumer technology, insurtech, and Web3, leading product strategy, UX/UI design, visual design, and design systems",
   },
 ];

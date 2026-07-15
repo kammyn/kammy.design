@@ -12,15 +12,8 @@ export const projects: Project[] = [
     slug: "goblintown",
     title: "GOBLINTOWN",
     description: "Interactive experiences for an evolving IP",
-    image: "/images/work/goblintown.jpg",
+    image: "/images/work/goblintown.png",
     color: "#3d5a3e",
-  },
-  {
-    slug: "meme-shuffle",
-    title: "MEME SHUFFLE",
-    description: "Making memes playful and unpredictable",
-    image: "/images/work/meme-shuffle.jpg",
-    color: "#6b2a4a",
   },
   {
     slug: "upstream",
@@ -28,6 +21,13 @@ export const projects: Project[] = [
     description: "Governance tools for decentralized communities",
     image: "/images/work/upstream.jpg",
     color: "#2a4a6b",
+  },
+  {
+    slug: "meme-shuffle",
+    title: "MEME SHUFFLE",
+    description: "Making memes playful and unpredictable",
+    image: "/images/work/meme-shuffle.jpg",
+    color: "#6b2a4a",
   },
   {
     slug: "meme-depot",
@@ -71,4 +71,10 @@ export function getNextProject(currentSlug: string): Project {
   const index = projects.findIndex((project) => project.slug === currentSlug);
   if (index === -1) return projects[0];
   return projects[(index + 1) % projects.length];
+}
+
+export function getPreviousProject(currentSlug: string): Project {
+  const index = projects.findIndex((project) => project.slug === currentSlug);
+  if (index === -1) return projects[0];
+  return projects[(index - 1 + projects.length) % projects.length];
 }

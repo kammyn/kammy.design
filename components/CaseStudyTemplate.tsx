@@ -23,7 +23,7 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
     <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden">
       <Link
         href="/work"
-        className="group inline-flex w-fit shrink-0 items-center gap-2 font-editorial text-base italic text-accent-text"
+        className="group inline-flex w-fit shrink-0 items-center gap-2 font-sans text-sm font-medium uppercase tracking-wide text-accent-text transition-colors hover:text-accent"
       >
         <svg
           width="24"
@@ -47,16 +47,18 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
       <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-hidden lg:grid lg:grid-cols-[minmax(0,394px)_1fr] lg:gap-10">
         <CaseStudyScrollColumn className="pr-1">
           <div className="flex flex-col gap-8 pb-2 lg:gap-10">
-            <header className="flex max-w-[335px] flex-col gap-8 text-accent-text">
-              <div className="flex flex-col gap-2 text-accent">
-                <h1 className="font-editorial text-[clamp(1.75rem,2.5vw,2rem)] not-italic leading-tight">
+            <header className="flex max-w-[335px] flex-col gap-8">
+              <div className="flex flex-col gap-2 text-heading">
+                <h1 className="font-editorial text-[clamp(1.75rem,2.5vw,2rem)] not-italic leading-tight text-heading">
                   {toTitleCase(study.title)}
                 </h1>
-                <p className="font-editorial text-[clamp(1.125rem,1.8vw,1.5rem)] not-italic leading-snug">
+                <p className="font-editorial text-[clamp(1.125rem,1.8vw,1.5rem)] not-italic leading-snug text-heading">
                   {study.subtitle}
                 </p>
               </div>
-              <p className="font-editorial text-base not-italic">{study.category}</p>
+              <p className="font-sans text-sm font-medium uppercase tracking-wide text-accent-text">
+                {study.category}
+              </p>
             </header>
 
             <div className="flex max-w-[394px] flex-col gap-10">
@@ -66,7 +68,7 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
                     <hr className="mb-10 border-0 border-t border-accent-text-muted/25" />
                   )}
                   <section className="flex flex-col gap-2 text-accent-text">
-                    <h2 className="font-sans text-sm font-medium tracking-wide text-accent-text">
+                    <h2 className="font-sans text-sm font-medium tracking-wide text-heading">
                       {section.label}
                     </h2>
                     {section.bullets && section.bullets.length > 0 ? (
@@ -94,17 +96,17 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
               <span className="font-sans text-xs font-medium uppercase tracking-wide text-accent-text-muted">
                 Next Case Study
               </span>
-              <span className="font-editorial text-[clamp(1.25rem,2vw,1.5rem)] leading-snug text-accent">
+              <span className="font-editorial text-[clamp(1.25rem,2vw,1.5rem)] leading-snug text-heading">
                 {toTitleCase(nextProject.title)}
               </span>
               <span className="font-editorial text-base not-italic leading-snug text-accent-text">
                 {nextProject.description}
               </span>
-              <span className="mt-1 inline-flex items-center gap-2 font-editorial text-base italic text-accent-text transition-colors group-hover:text-accent">
+              <span className="mt-1 inline-flex items-center gap-2 font-sans text-sm font-medium uppercase tracking-wide text-accent-text transition-colors group-hover:text-accent">
                 View Project
                 <svg
-                  width="20"
-                  height="20"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   aria-hidden

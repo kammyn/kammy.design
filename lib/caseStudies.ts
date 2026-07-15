@@ -157,7 +157,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         label: "OVERVIEW",
-        body: "Goblintown is an entertainment IP developed by Truth Arts, spanning storytelling, games, digital experiences, and community-driven worldbuilding. I contributed to the development of a 100% hand-drawn roguelike game, designing gameplay systems and interactive experiences that expanded the Goblintown universe.",
+        body: "Goblintown is an entertainment IP developed by Truth Arts, spanning storytelling, games, digital experiences, and community-driven worldbuilding. I contributed to the development of a 100% hand-drawn roguelike game, designing gameplay systems, UI/UX, and interactive experiences that expanded the Goblintown universe.",
       },
       {
         label: "INSIGHT",
@@ -165,15 +165,15 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         label: "STRATEGY",
-        body: "The goal was to translate Goblintown's personality and worldbuilding into gameplay. Rather than simply adapting the brand into a game, the experience was designed to reinforce the humor, unpredictability, and identity that defined the broader IP.",
+        body: "The goal was to translate Goblintown's personality and worldbuilding into a range of interactive products and experiences. Rather than simply extending the brand into new mediums, each experience was designed to reinforce the humor, unpredictability, and identity that defined the broader IP.",
       },
       {
         label: "EXECUTION",
-        body: "I designed and developed a roguelike game while contributing to a broader suite of interactive products and digital experiences across the Goblintown ecosystem. Each project explored a different expression of the IP while maintaining a cohesive experience within the larger Goblintown universe.",
+        body: "I designed and developed a 100% hand-drawn roguelike game, contributing gameplay systems, concept exploration, UI/UX, and front-end implementation. Beyond the game, I designed interactive products and web experiences that extended the Goblintown IP while maintaining a cohesive experience across the broader Truth Arts ecosystem.",
       },
       {
         label: "OUTCOME",
-        body: "The project expanded Goblintown beyond traditional digital experiences, demonstrating how interactive gameplay could strengthen community engagement and deepen the identity of the broader entertainment IP.",
+        body: "The project expanded the Goblintown ecosystem through games, interactive products, and digital experiences, creating new ways for audiences to engage with the IP while reinforcing a cohesive experience across the broader Truth Arts universe.",
       },
     ],
     images: [
@@ -298,7 +298,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "przmatic",
     title: "PRZMATIC",
     subtitle: "Mapping thoughts into insights",
-    category: "Productivity / Mind Mapping / Creativity",
+    category: "Productivity / Mind Mapping / Consumer",
     sections: [
       {
         label: "OVERVIEW",
@@ -324,28 +324,20 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         layout: "row",
-        columns: 3,
+        columns: 2,
         items: [
           {
             type: "video",
-            src: "/videos/case-studies/przmatic1.mp4",
-            alt: "Przmatic product demo",
-            background: "#0B4444",
-            fit: "cover",
-            aspectRatio: "9/16",
-          },
-          {
-            type: "video",
-            src: "/videos/case-studies/przmatic2.mp4",
-            alt: "Przmatic guided prompts flow",
-            background: "#0B4444",
-            fit: "cover",
-            aspectRatio: "9/16",
-          },
-          {
-            type: "video",
-            src: "/videos/case-studies/przmatic3.mp4",
+            src: "/videos/case-studies/przmatic-mindmap-1.mp4",
             alt: "Przmatic mind map interaction",
+            background: "#0B4444",
+            fit: "cover",
+            aspectRatio: "9/16",
+          },
+          {
+            type: "video",
+            src: "/videos/case-studies/przmatic-mindmap-2.mp4",
+            alt: "Przmatic guided prompts flow",
             background: "#0B4444",
             fit: "cover",
             aspectRatio: "9/16",
@@ -432,7 +424,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "crofusion",
     title: "CroFusion",
     subtitle: "AI generated landing pages for marketing optimization",
-    category: "AI / Marketing Tools / Business Tools",
+    category: "AI / Marketing Tools / B2B",
     sections: [
       {
         label: "OVERVIEW",

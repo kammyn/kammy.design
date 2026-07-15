@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
+import { LogoSparkle } from "./LogoSparkle";
 import { ThemeToggle } from "./ThemeToggle";
 
 type NavItem = "work" | "about";
@@ -13,6 +14,9 @@ const navLinks: { label: string; href: string; key: NavItem }[] = [
   { label: "WORK", href: "/work", key: "work" },
   { label: "ABOUT", href: "/about", key: "about" },
 ];
+
+const CONTACT_HREF = "mailto:kammynx@gmail.com";
+const LINKEDIN_HREF = "https://www.linkedin.com/in/kammyn";
 
 type SiteNavProps = {
   active?: NavItem;
@@ -56,7 +60,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
                   active === key ? (
                     <span
                       key={key}
-                      className="border-b-2 border-accent py-3 font-sans text-lg font-bold text-accent"
+                      className="border-b-2 border-heading py-3 font-sans text-lg font-bold text-heading"
                     >
                       {label}
                     </span>
@@ -64,13 +68,31 @@ export function SiteNav({ active, className }: SiteNavProps) {
                     <Link
                       key={key}
                       href={href}
-                      className="py-3 font-sans text-lg font-medium text-accent-text transition-opacity hover:opacity-70"
+                      className="py-3 font-sans text-lg font-medium text-heading transition-colors hover:text-accent"
                       onClick={closeMenu}
                     >
                       {label}
                     </Link>
                   ),
                 )}
+                <a
+                  href={CONTACT_HREF}
+                  className="py-3 font-sans text-lg font-medium text-heading transition-colors hover:text-accent"
+                  onClick={closeMenu}
+                >
+                  CONTACT
+                </a>
+                <a
+                  href={LINKEDIN_HREF}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 py-3 font-sans text-lg font-medium text-heading transition-colors hover:text-accent"
+                  onClick={closeMenu}
+                  aria-label="LinkedIn"
+                >
+                  <LinkedinLogo weight="fill" size={22} />
+                  LINKEDIN
+                </a>
               </div>
 
               <div className="mt-auto flex items-center gap-3 pt-8">
@@ -93,14 +115,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
             aria-label="Home"
             onClick={closeMenu}
           >
-            <Image
-              src="/images/home/logo-star.svg"
-              alt=""
-              width={60}
-              height={41}
-              priority
-              className="h-auto w-9 sm:w-10 lg:w-[60px]"
-            />
+            <LogoSparkle className="h-auto w-9 sm:w-10 lg:w-[60px]" />
           </Link>
 
           <div className="hidden items-center gap-8 lg:flex lg:gap-10">
@@ -108,7 +123,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
               active === key ? (
                 <span
                   key={key}
-                  className="border-b-2 border-accent px-1 py-1 font-sans text-base font-bold text-accent"
+                  className="border-b-2 border-heading px-1 py-1 font-sans text-base font-bold text-heading"
                 >
                   {label}
                 </span>
@@ -116,12 +131,27 @@ export function SiteNav({ active, className }: SiteNavProps) {
                 <Link
                   key={key}
                   href={href}
-                  className="px-1 py-1 font-sans text-base font-medium text-accent-text transition-opacity hover:opacity-70"
+                  className="px-1 py-1 font-sans text-base font-medium text-heading transition-colors hover:text-accent"
                 >
                   {label}
                 </Link>
               ),
             )}
+            <a
+              href={CONTACT_HREF}
+              className="px-1 py-1 font-sans text-base font-medium text-heading transition-colors hover:text-accent"
+            >
+              CONTACT
+            </a>
+            <a
+              href={LINKEDIN_HREF}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="text-heading transition-colors hover:text-accent"
+            >
+              <LinkedinLogo weight="fill" size={22} />
+            </a>
             <ThemeToggle />
           </div>
 

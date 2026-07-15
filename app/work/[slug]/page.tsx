@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { CaseStudySideNav } from "@/components/CaseStudySideNav";
 import { CaseStudyTemplate } from "@/components/CaseStudyTemplate";
 import { PageShell } from "@/components/PageShell";
 import { getCaseStudyBySlug } from "@/lib/caseStudies";
@@ -35,7 +36,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   }
 
   return (
-    <PageShell active="work">
+    <PageShell
+      active="work"
+      exterior={<CaseStudySideNav slug={study.slug} />}
+    >
       <CaseStudyTemplate study={study} />
     </PageShell>
   );
