@@ -320,16 +320,10 @@ html.dark .site-background__image--night {
 }
 
 .page-panel--star {
-  /* Keep Figma 345/764 ratio — pinning top+bottom stretches awkwardly on tall phones */
-  bottom: auto;
-  aspect-ratio: 345 / 764;
-  width: min(
-    calc(100% - (var(--page-gutter-x) * 2)),
-    calc(
-      (100svh - var(--page-gutter-top) - var(--page-gutter-bottom)) * 345 / 764
-    )
-  );
-  max-height: calc(100svh - var(--page-gutter-top) - var(--page-gutter-bottom));
+  /* Mobile: same outer frame as .page-panel--solid (Work). Do not
+     letterbox via aspect-ratio — that shrunk width below --page-gutter-x.
+     Desktop keeps 1280/836 ratio in the 744px media query below. */
+  bottom: var(--page-gutter-bottom);
 }
 
 .page-panel--solid {
