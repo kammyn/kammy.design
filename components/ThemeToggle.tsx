@@ -25,7 +25,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="flex items-center gap-1 text-accent outline-none focus:outline-none focus-visible:outline-none"
+      className="flex items-center gap-1 text-heading outline-none focus:outline-none focus-visible:outline-none"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       <SunIcon className="size-[17px] w-[18px]" />

@@ -148,7 +148,7 @@ export function SiteNav({ active, className }: SiteNavProps) {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="text-accent transition-colors hover:text-heading"
+              className="text-heading transition-colors hover:text-accent"
             >
               <LinkedinLogo weight="fill" size={22} />
             </a>
@@ -164,19 +164,19 @@ export function SiteNav({ active, className }: SiteNavProps) {
           >
             <span
               className={cn(
-                "block h-0.5 w-5 bg-accent transition-transform duration-300",
+                "block h-0.5 w-5 bg-heading transition-transform duration-300",
                 menuOpen && "translate-y-2 rotate-45",
               )}
             />
             <span
               className={cn(
-                "block h-0.5 w-5 bg-accent transition-opacity duration-300",
+                "block h-0.5 w-5 bg-heading transition-opacity duration-300",
                 menuOpen && "opacity-0",
               )}
             />
             <span
               className={cn(
-                "block h-0.5 w-5 bg-accent transition-transform duration-300",
+                "block h-0.5 w-5 bg-heading transition-transform duration-300",
                 menuOpen && "-translate-y-2 -rotate-45",
               )}
             />
